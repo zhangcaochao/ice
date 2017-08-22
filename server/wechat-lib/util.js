@@ -45,3 +45,10 @@ function formatMessage (result) {
 
     return message
 }
+
+export {
+    formatMessage,
+    parseXML,
+   // tpl,
+    //sign
+}

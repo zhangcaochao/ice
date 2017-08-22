@@ -1,6 +1,6 @@
 import sha1 from 'sha1'
 import getRawBody from 'raw-body'
-import * as util from '../wechat-lib/util'
+import * as util from './util'
 export default function (opt,reply) {
     return async function wechatMiddle(ctx,next) {
             const token = opt.token
@@ -21,7 +21,6 @@ export default function (opt,reply) {
                     ctx.body = 'Failed'
                 }
             }
-            console.log(ctx.method)
 
             if (ctx.method === "POST") {
                 if (sha !== signature) {
@@ -34,7 +33,7 @@ export default function (opt,reply) {
                     encoding: ctx.charset
                 })
 
-                console.log("klfjl")
+                console.log(data)
 
                 const content = await util.parseXML(data)
                 const message = util.formatMessage(content.xml)
@@ -46,19 +45,19 @@ export default function (opt,reply) {
 
                 const replyBody = ctx.body
                 const msg = ctx.weixin
-                const xml = util.tpl(replyBody, msg)
+               // const xml = util.tpl(replyBody, msg)
+
+              let  xml =`<xml>
+<ToUserName><![CDATA[${content.xml.FromUserName[0]}]]></ToUserName>
+<FromUserName><![CDATA[${content.xml.ToUserName[0]}]]></FromUserName>
+<CreateTime>12345678</CreateTime>
+<MsgType><![CDATA[text]]></MsgType>
+<Content><![CDATA[${replyBody}]]></Content>
+</xml>`
 
                 ctx.status = 200
                 ctx.type = 'application/xml'
-                ctx.body = `
-  <xml>
-<ToUserName><![CDATA[toUser]]></ToUserName>
-<FromUserName><![CDATA[fromUser]]></FromUserName>
-<CreateTime>12345678</CreateTime>
-<MsgType><![CDATA[text]]></MsgType>
-<Content><![CDATA[你好]]></Content>
-</xml>
-`
+                ctx.body = xml
             }
 
     }
