@@ -13,7 +13,7 @@ const port = process.env.PORT || 3001
 let config = require('../nuxt.config.js')
     config.dev = !(process.env === 'production')
 
-const MIDDLEWARES = ['router']
+const MIDDLEWARES = ['database','router']
 class Server{
   constructor() {
     this.app=new Koa()
