@@ -46,9 +46,35 @@ function formatMessage (result) {
     return message
 }
 
+function tpl (content, message) {
+    let type = 'text'
+
+    if (Array.isArray(content)) {
+        type = 'news'
+    }
+
+    if (!content) {
+        content = 'Empty News'
+    }
+
+    if (content && content.type) {
+        type = content.type
+    }
+
+    let info = Object.assign({}, {
+        content: content.Content,
+        createTime: new Date().getTime(),
+        msgType: type,
+        toUserName: message.FromUserName,
+        fromUserName: message.ToUserName
+    })
+
+    return template(info)
+}
+
 export {
     formatMessage,
     parseXML,
-   // tpl,
+    tpl,
     //sign
 }

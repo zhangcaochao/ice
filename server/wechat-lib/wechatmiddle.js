@@ -32,29 +32,16 @@ export default function (opt,reply) {
                     limit: '1mb',
                     encoding: ctx.charset
                 })
-
-                console.log(data)
-
                 const content = await util.parseXML(data)
                 const message = util.formatMessage(content.xml)
-
                 ctx.weixin = message
                 console.log(message)
-
                 await reply.apply(ctx, [ctx, next])
-
                 const replyBody = ctx.body
                 const msg = ctx.weixin
-               // const xml = util.tpl(replyBody, msg)
-
-              let  xml =`<xml>
-<ToUserName><![CDATA[${content.xml.FromUserName[0]}]]></ToUserName>
-<FromUserName><![CDATA[${content.xml.ToUserName[0]}]]></FromUserName>
-<CreateTime>12345678</CreateTime>
-<MsgType><![CDATA[text]]></MsgType>
-<Content><![CDATA[${replyBody}]]></Content>
-</xml>`
-
+                console.log(replyBody)
+                console.log(msg)
+                const xml = util.tpl(replyBody, msg)
                 ctx.status = 200
                 ctx.type = 'application/xml'
                 ctx.body = xml

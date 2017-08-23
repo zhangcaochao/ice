@@ -26,12 +26,8 @@ class Server{
           R.map(i=>i(app)),
           require,
           i =>`${r('./middlewares')}/${i}`
-        
         )
-
       )
-
-
   }
 
   async start(){
