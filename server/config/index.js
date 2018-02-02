@@ -1,8 +1,11 @@
-export default {
-	db:'mongodb://devapp.plaso.cn:27018/ice',
-	wechat:{
-		appID:"wx7c0060999692dd95",
-		appSecret:"d06efc005839874a8c050fab5f9d8e1a",
-		token:'xxx'
-	}
-}
+import _ from 'lodash'
+import { resolve } from 'path'
+
+const host = process.env.HOST || 'localhost'
+const env = process.env.NODE_ENV || 'development'
+const conf = require(resolve(__dirname, `./${env}.json`))
+
+export default _.assign({
+  env,
+  host
+}, conf)

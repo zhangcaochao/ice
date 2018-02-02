@@ -6,7 +6,20 @@ require('babel-core/register')({
     'stage-3',
     'latest-node'
   ],
- 
+  'plugins': [
+    // 'transform-decorators-legacy',
+    // [
+    //   'module-alias', [
+    //     {
+    //       src: r('./server'),
+    //       'expose': '~',
+    //       src: r('./server/database'),
+    //       'expose': 'database'
+    //     }
+    //   ]
+    // ]
+  ]
+
 })
 
 require('babel-polyfill')

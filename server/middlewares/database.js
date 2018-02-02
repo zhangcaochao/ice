@@ -8,24 +8,21 @@ fs.readdirSync(models)
     .forEach(file => require(resolve(models, file)))
 
 export const database = app => {
-    if (config.env === 'development') {
-        mongoose.set('debug', true)
-    }
+  if (config.env === 'development') {
+    mongoose.set('debug', true)
+  }
 
+  mongoose.connect(config.db)
+
+  mongoose.connection.on('disconnected', () => {
     mongoose.connect(config.db)
+  })
 
-    mongoose.connection.on('disconnected', () => {
-        mongoose.connect(config.db)
-    })
+  mongoose.connection.on('error', err => {
+    console.error(err)
+  })
 
-    mongoose.connection.on('error', err => {
-        console.error(err)
-    })
-
-    mongoose.connection.on('open', async () => {
-        console.log('Connected to MongoDB')
-    })
+  mongoose.connection.on('open', async () => {
+    console.log('Connected to MongoDB')
+  })
 }
-
-
-

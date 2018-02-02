@@ -13,7 +13,6 @@ export default function (opt,reply) {
 
             const str = [token, timestamp, nonce].sort().join('')
             const sha = sha1(str)
-            console.log(sha === signature)
             if (ctx.method === 'GET') {
                 if (sha === signature) {
                     ctx.body = echostr
@@ -35,12 +34,9 @@ export default function (opt,reply) {
                 const content = await util.parseXML(data)
                 const message = util.formatMessage(content.xml)
                 ctx.weixin = message
-                console.log(message)
                 await reply.apply(ctx, [ctx, next])
                 const replyBody = ctx.body
                 const msg = ctx.weixin
-                console.log(replyBody)
-                console.log(msg)
                 const xml = util.tpl(replyBody, msg)
                 ctx.status = 200
                 ctx.type = 'application/xml'
