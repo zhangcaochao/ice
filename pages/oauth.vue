@@ -16,11 +16,11 @@
         title: `测试页面`
       }
     },
-    beforeMount(){
-      const url  = window.location.href
-      this.$store.dispatch('getUserByOAuth',url).then(res=>{
+    beforeMount () {
+      const url = window.location.href
+      this.$store.dispatch('getUserByOAuth', url).then(res => {
         console.log(res)
-        if(res.data.success){
+        if (res.data.success) {
           const params = res.data
         }
       })

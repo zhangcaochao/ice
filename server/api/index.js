@@ -1,5 +1,5 @@
 import * as wechat from './wechat'
-// import * as wiki from './wiki'
+import * as wiki from './wiki'
 // import * as product from './product'
 // import * as admin from './admin'
 // import * as payment from './payment'
@@ -8,7 +8,7 @@ import * as wechat from './wechat'
 export default {
   // payment: payment,
   wechat: wechat,
-  // wiki: wiki,
+  wiki: wiki
   // admin: admin,
   // user: user,
   // product: product

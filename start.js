@@ -7,6 +7,7 @@ require('babel-core/register')({
     'latest-node'
   ],
   'plugins': [
+    'transform-decorators-legacy'
     // 'transform-decorators-legacy',
     // [
     //   'module-alias', [

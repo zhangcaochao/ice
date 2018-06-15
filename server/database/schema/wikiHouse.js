@@ -42,4 +42,3 @@ WikiHouseSchema.pre('save', function (next) {
 })
 
 const WikiHouse = mongoose.model('WikiHouse', WikiHouseSchema)
-

@@ -28,13 +28,11 @@ export async function redirect (ctx, next) {
 
 export async function oauth (ctx, next) {
   let url = ctx.query.url
-  console.log(url,'xxxx')
 
   url = decodeURIComponent(url)
 
   const urlObj = urlParse(url)
   const params = queryParse(urlObj.query)
-  console.log(params)
   const code = params.code
   const user = await api.wechat.getUserByCode(code)
 

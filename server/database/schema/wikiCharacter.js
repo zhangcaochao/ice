@@ -28,7 +28,7 @@ const WikiCharacterSchema = new mongoose.Schema({
       default: Date.now()
     }
   }
-})
+}, { _id: false })
 
 WikiCharacterSchema.pre('save', function (next) {
   if (this.isNew) {
@@ -36,8 +36,7 @@ WikiCharacterSchema.pre('save', function (next) {
   } else {
     this.meta.updatedAt = Date.now()
   }
-
   next()
 })
 
-const WikiCharacter = mongoose.model('WikiCharacter', WikiCharacterSchema)
+export const WikiCharacter = mongoose.model('WikiCharacter', WikiCharacterSchema)
